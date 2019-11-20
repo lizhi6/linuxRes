@@ -30,6 +30,8 @@ def for_index():
     return  render_template("index.html",user=user)
 @app.route("/login",methods=["POST"])
 def login():
+
+
     form =request.form
     username =form.get('username')
     password =form.get('password')
@@ -41,7 +43,11 @@ def login():
         return render_template("login.html")
     if username=="admin" and password =="123456":
         flash("登陆成功")
-        return render_template("one_index.html")
+        with open('list.txt', 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                print("9888888888========", line)
+        return render_template("one_index.html",lines=lines)
     else:
         flash("用户名或密码错误")
         return  render_template("login.html")
